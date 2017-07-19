@@ -26,7 +26,8 @@ export class PlatformMock {
 			'registerListener',
 			'win',
 			'getActiveElement',
-			'raf'
+			'raf',
+			'timeout'
 		]);
 
 		instance.dir.and.returnValue('');
@@ -46,6 +47,9 @@ export class PlatformMock {
 		instance.win.and.returnValue(window);
 		instance.getActiveElement.and.returnValue(document['activeElement']);
 		instance.raf.and.returnValue(1);
+		instance.timeout.and.callFake(function(callback: any, timer: number){
+			return setTimeout(callback, timer);
+		});
 
 		return instance;
 	}
